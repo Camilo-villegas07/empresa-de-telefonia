@@ -8,7 +8,13 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        // Redirige a la lista de clientes al entrar a la raíz
-        return "redirect:/clientes";
+        // Redirige a la página de login
+        return "redirect:/login";
+    }
+
+    @GetMapping("/home")
+    public String homePage() {
+        // Muestra la página principal interactiva
+        return "home";
     }
 }

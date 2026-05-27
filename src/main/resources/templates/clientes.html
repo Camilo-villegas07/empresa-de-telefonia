@@ -22,8 +22,8 @@
                 <td th:text="${cliente.telefono}"></td>
                 <td th:text="${cliente.direccion}"></td>
                 <td>
-                    <a th:href="@{/editarCliente/{id}(id=${cliente.id})}" class="btn btn-sm btn-warning">✏️ Editar</a>
-                    <a th:href="@{/eliminarCliente/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar cliente?')">🗑️ Eliminar</a>
+                    <a th:href="@{/editarCliente/{id}(id=${cliente.id})}" class="btn btn-sm btn-warning">Editar</a>
+                    <a th:href="@{/eliminarCliente/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar cliente?')">Eliminar</a>
                 </td>
             </tr>
         </tbody>
