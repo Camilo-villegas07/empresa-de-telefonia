@@ -1,53 +1,151 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="navegacion :: head"></head>
+<head th:replace="navegacion :: head">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 700px;
+            margin: 40px auto;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-title {
+            color: #333;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-title i {
+            margin-right: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .btn-success-custom {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+        
+        .btn-secondary-custom {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+    </style>
+</head>
 <body>
 <div th:replace="navegacion :: navbar"></div>
 
-<div class="container mt-4">
-    <h2>➕ Registrar Venta</h2>
-    <form th:action="@{/guardarVenta}" th:object="${venta}" method="post">
-        <div class="mb-3">
-            <label class="form-label">Cliente *</label>
-            <select th:field="*{cliente.id}" class="form-select" required>
-                <option value="">-- Seleccione cliente --</option>
-                <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre + ' - ' + c.cedula}"></option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Vendedor *</label>
-            <select th:field="*{vendedor.id}" class="form-select" required>
-                <option value="">-- Seleccione vendedor --</option>
-                <option th:each="v : ${vendedores}" th:value="${v.id}" th:text="${v.nombre}"></option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Plan *</label>
-            <select th:field="*{plan.id}" class="form-select" required>
-                <option value="">-- Seleccione plan --</option>
-                <option th:each="p : ${planes}" th:value="${p.id}" th:text="${p.nombre + ' - $' + p.precio}"></option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Fecha de venta</label>
-            <input type="date" th:field="*{fechaVenta}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Estado inicial</label>
-            <select th:field="*{estado}" class="form-select">
-                <option th:each="est : ${T(com.telefonia.enums.EstadoVenta).values()}" 
-                        th:value="${est.name()}" th:text="${est.name()}"></option>
-            </select>
-            <small class="text-muted">Por defecto: PROSPECTO</small>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Observaciones</label>
-            <textarea th:field="*{observaciones}" class="form-control" rows="2"></textarea>
-        </div>
-        <button type="submit" class="btn btn-success">💾 Guardar Venta</button>
-        <a href="/ventas" class="btn btn-secondary">Cancelar</a>
-    </form>
+<div class="container">
+    <div class="form-container">
+        <h2 class="form-title">
+            <i class="fas fa-chart-line"></i>
+            Registrar Venta
+        </h2>
+        <form th:action="@{/guardarVenta}" th:object="${venta}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Cliente *</label>
+                <select th:field="*{cliente.id}" class="form-select" required>
+                    <option value="">-- Seleccione cliente --</option>
+                    <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre + ' - ' + c.cedula}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Vendedor *</label>
+                <select th:field="*{vendedor.id}" class="form-select" required>
+                    <option value="">-- Seleccione vendedor --</option>
+                    <option th:each="v : ${vendedores}" th:value="${v.id}" th:text="${v.nombre}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Plan *</label>
+                <select th:field="*{plan.id}" class="form-select" required>
+                    <option value="">-- Seleccione plan --</option>
+                    <option th:each="p : ${planes}" th:value="${p.id}" th:text="${p.nombre + ' - $' + p.precio}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fecha de venta</label>
+                <input type="date" th:field="*{fechaVenta}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estado inicial</label>
+                <select th:field="*{estado}" class="form-select">
+                    <option th:each="est : ${T(com.telefonia.enums.EstadoVenta).values()}" 
+                            th:value="${est.name()}" th:text="${est.name()}"></option>
+                </select>
+                <small class="text-muted">Por defecto: PROSPECTO</small>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Observaciones</label>
+                <textarea th:field="*{observaciones}" class="form-control" rows="3" placeholder="Ingrese observaciones adicionales"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success-custom">
+                <i class="fas fa-save me-2"></i>Guardar Venta
+            </button>
+            <a href="/ventas" class="btn btn-secondary-custom">
+                <i class="fas fa-times me-2"></i>Cancelar
+            </a>
+        </form>
+    </div>
 </div>
+
+<div th:replace="navegacion :: footer"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

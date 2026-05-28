@@ -2,6 +2,7 @@ package com.telefonia.controller;
 
 import com.telefonia.modelo.Usuario;
 import com.telefonia.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +24,41 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam String username, 
                        @RequestParam String password,
+                       HttpSession session,
                        RedirectAttributes redirectAttributes) {
-        // Aquí debes implementar la lógica de autenticación
-        // Por ahora, es una implementación básica de ejemplo
-        
-        // Validación simple (debes reemplazar esto con autenticación real)
+        // Validación para el usuario admin
         if ("admin".equals(username) && "admin".equals(password)) {
+            session.setAttribute("usuario", "admin");
+            session.setAttribute("isAdmin", true);
             return "redirect:/home";
-        } else {
-            redirectAttributes.addAttribute("error", "true");
+        }
+        
+        // Buscar usuario en la base de datos
+        Usuario usuario = usuarioRepository.findByUsername(username);
+        
+        if (usuario == null) {
+            redirectAttributes.addAttribute("error", "usuario_no_encontrado");
             return "redirect:/login";
         }
+        
+        // Verificar contraseña
+        if (!usuario.getPassword().equals(password)) {
+            redirectAttributes.addAttribute("error", "password_incorrecto");
+            return "redirect:/login";
+        }
+        
+        // Verificar si el usuario está activo
+        if (!usuario.getActivo()) {
+            redirectAttributes.addAttribute("error", "usuario_inactivo");
+            return "redirect:/login";
+        }
+        
+        // Login exitoso - guardar sesión
+        session.setAttribute("usuario", usuario.getUsername());
+        session.setAttribute("isAdmin", false);
+        session.setAttribute("usuarioId", usuario.getId());
+        
+        return "redirect:/home";
     }
 
     @GetMapping("/registro")
@@ -48,18 +73,10 @@ public class LoginController {
                           @RequestParam String telefono,
                           @RequestParam String password,
                           @RequestParam String confirmPassword,
+                          @RequestParam String cedula,
                           @RequestParam String departamento,
                           @RequestParam String ciudad,
-                          @RequestParam String tipoDireccion,
-                          @RequestParam String tipoVia,
-                          @RequestParam String numeroVia,
-                          @RequestParam(required = false) String prefijoVia,
-                          @RequestParam(required = false) String cardinalidadVia,
-                          @RequestParam(required = false) String numeroViaCruce,
-                          @RequestParam(required = false) String prefijoViaCruce,
-                          @RequestParam(required = false) String cardinalidadViaCruce,
-                          @RequestParam String numeroPlaca,
-                          @RequestParam(required = false) String unidadUrbanizacion,
+                          @RequestParam String direccion,
                           RedirectAttributes redirectAttributes) {
         
         // Validación de contraseñas
@@ -83,10 +100,7 @@ public class LoginController {
         // Crear nuevo usuario
         Usuario usuario = new Usuario(
             nombre, email, username, telefono, password,
-            departamento, ciudad, tipoDireccion, tipoVia,
-            numeroVia, prefijoVia, cardinalidadVia, numeroViaCruce,
-            prefijoViaCruce, cardinalidadViaCruce, numeroPlaca,
-            unidadUrbanizacion
+            cedula, departamento, ciudad, direccion
         );
         
         // Guardar en base de datos
@@ -96,5 +110,11 @@ public class LoginController {
         
         // Redirigir al login después del registro exitoso
         return "redirect:/login?registro=exitoso";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 }

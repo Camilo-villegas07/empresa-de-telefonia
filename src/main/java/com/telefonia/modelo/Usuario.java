@@ -15,22 +15,14 @@ public class Usuario {
     private String username;
     private String telefono;
     private String password;
+    private String cedula;
     
     // Ubicación
     private String departamento;
     private String ciudad;
     
     // Dirección
-    private String tipoDireccion;
-    private String tipoVia;
-    private String numeroVia;
-    private String prefijoVia;
-    private String cardinalidadVia;
-    private String numeroViaCruce;
-    private String prefijoViaCruce;
-    private String cardinalidadViaCruce;
-    private String numeroPlaca;
-    private String unidadUrbanizacion;
+    private String direccion;
     
     private LocalDateTime fechaRegistro;
     private Boolean activo;
@@ -41,28 +33,17 @@ public class Usuario {
     }
 
     public Usuario(String nombre, String email, String username, String telefono, String password,
-                   String departamento, String ciudad, String tipoDireccion, String tipoVia,
-                   String numeroVia, String prefijoVia, String cardinalidadVia, String numeroViaCruce,
-                   String prefijoViaCruce, String cardinalidadViaCruce, String numeroPlaca,
-                   String unidadUrbanizacion) {
+                   String cedula, String departamento, String ciudad, String direccion) {
         this();
         this.nombre = nombre;
         this.email = email;
         this.username = username;
         this.telefono = telefono;
         this.password = password;
+        this.cedula = cedula;
         this.departamento = departamento;
         this.ciudad = ciudad;
-        this.tipoDireccion = tipoDireccion;
-        this.tipoVia = tipoVia;
-        this.numeroVia = numeroVia;
-        this.prefijoVia = prefijoVia;
-        this.cardinalidadVia = cardinalidadVia;
-        this.numeroViaCruce = numeroViaCruce;
-        this.prefijoViaCruce = prefijoViaCruce;
-        this.cardinalidadViaCruce = cardinalidadViaCruce;
-        this.numeroPlaca = numeroPlaca;
-        this.unidadUrbanizacion = unidadUrbanizacion;
+        this.direccion = direccion;
     }
 
     // Getters y Setters
@@ -114,6 +95,14 @@ public class Usuario {
         this.password = password;
     }
 
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
     public String getDepartamento() {
         return departamento;
     }
@@ -130,84 +119,12 @@ public class Usuario {
         this.ciudad = ciudad;
     }
 
-    public String getTipoDireccion() {
-        return tipoDireccion;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setTipoDireccion(String tipoDireccion) {
-        this.tipoDireccion = tipoDireccion;
-    }
-
-    public String getTipoVia() {
-        return tipoVia;
-    }
-
-    public void setTipoVia(String tipoVia) {
-        this.tipoVia = tipoVia;
-    }
-
-    public String getNumeroVia() {
-        return numeroVia;
-    }
-
-    public void setNumeroVia(String numeroVia) {
-        this.numeroVia = numeroVia;
-    }
-
-    public String getPrefijoVia() {
-        return prefijoVia;
-    }
-
-    public void setPrefijoVia(String prefijoVia) {
-        this.prefijoVia = prefijoVia;
-    }
-
-    public String getCardinalidadVia() {
-        return cardinalidadVia;
-    }
-
-    public void setCardinalidadVia(String cardinalidadVia) {
-        this.cardinalidadVia = cardinalidadVia;
-    }
-
-    public String getNumeroViaCruce() {
-        return numeroViaCruce;
-    }
-
-    public void setNumeroViaCruce(String numeroViaCruce) {
-        this.numeroViaCruce = numeroViaCruce;
-    }
-
-    public String getPrefijoViaCruce() {
-        return prefijoViaCruce;
-    }
-
-    public void setPrefijoViaCruce(String prefijoViaCruce) {
-        this.prefijoViaCruce = prefijoViaCruce;
-    }
-
-    public String getCardinalidadViaCruce() {
-        return cardinalidadViaCruce;
-    }
-
-    public void setCardinalidadViaCruce(String cardinalidadViaCruce) {
-        this.cardinalidadViaCruce = cardinalidadViaCruce;
-    }
-
-    public String getNumeroPlaca() {
-        return numeroPlaca;
-    }
-
-    public void setNumeroPlaca(String numeroPlaca) {
-        this.numeroPlaca = numeroPlaca;
-    }
-
-    public String getUnidadUrbanizacion() {
-        return unidadUrbanizacion;
-    }
-
-    public void setUnidadUrbanizacion(String unidadUrbanizacion) {
-        this.unidadUrbanizacion = unidadUrbanizacion;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public LocalDateTime getFechaRegistro() {

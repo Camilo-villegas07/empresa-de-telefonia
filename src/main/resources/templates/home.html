@@ -4,26 +4,31 @@
     <title>Inicio - Cercanía Móvil</title>
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.3s ease;
+        }
+        
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
         
         .hero-section {
-            padding: 80px 0;
+            padding: 80px 0 60px 0;
             text-align: center;
             color: white;
         }
         
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: bold;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 40px;
             opacity: 0.9;
         }
@@ -32,30 +37,47 @@
             padding: 40px 0;
         }
         
+        .row.g-4 {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .row.g-4 > div {
+            display: flex;
+        }
+        
         .card-custom {
             border: none;
             border-radius: 20px;
             transition: all 0.3s ease;
             cursor: pointer;
             height: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
+            min-height: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .card-custom:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.25);
         }
         
         .card-custom .card-body {
             padding: 40px 30px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
         .card-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .card-title {
@@ -63,43 +85,82 @@
             font-weight: bold;
             margin-bottom: 15px;
             color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        [data-theme="dark"] .card-title {
+            color: #ffffff;
         }
         
         .card-description {
             color: #666;
             font-size: 1rem;
             margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        [data-theme="dark"] .card-description {
+            color: #cccccc;
         }
         
         .card-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
             border: none;
             padding: 12px 30px;
             border-radius: 25px;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
         
-        .card-custom:hover .card-btn {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
         }
         
         .card-clientes {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(56, 239, 125, 0.15) 100%);
+            transition: background 0.3s ease;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        [data-theme="dark"] .card-clientes {
+            background: linear-gradient(135deg, rgba(42, 42, 74, 0.9) 0%, rgba(31, 31, 58, 0.9) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.5);
         }
         
         .card-vendedores {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.15) 0%, rgba(245, 87, 108, 0.15) 100%);
+            transition: background 0.3s ease;
+            border: 2px solid rgba(240, 147, 251, 0.3);
+        }
+        
+        [data-theme="dark"] .card-vendedores {
+            background: linear-gradient(135deg, rgba(58, 58, 90, 0.9) 0%, rgba(47, 47, 74, 0.9) 100%);
+            border: 2px solid rgba(240, 147, 251, 0.5);
         }
         
         .card-planes {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: linear-gradient(135deg, rgba(0, 176, 155, 0.15) 0%, rgba(150, 201, 61, 0.15) 100%);
+            transition: background 0.3s ease;
+            border: 2px solid rgba(0, 176, 155, 0.3);
+        }
+        
+        [data-theme="dark"] .card-planes {
+            background: linear-gradient(135deg, rgba(58, 90, 90, 0.9) 0%, rgba(58, 74, 90, 0.9) 100%);
+            border: 2px solid rgba(0, 176, 155, 0.5);
         }
         
         .card-ventas {
-            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
+            transition: background 0.3s ease;
+            border: 2px solid rgba(79, 172, 254, 0.3);
+        }
+        
+        [data-theme="dark"] .card-ventas {
+            background: linear-gradient(135deg, rgba(90, 58, 90, 0.9) 0%, rgba(90, 90, 58, 0.9) 100%);
+            border: 2px solid rgba(79, 172, 254, 0.5);
         }
         
         .stats-section {
@@ -109,43 +170,100 @@
             padding: 40px;
             margin: 40px 0;
             color: white;
+            transition: background 0.3s ease;
+        }
+        
+        [data-theme="dark"] .stats-section {
+            background: rgba(0,0,0,0.3);
         }
         
         .stat-item {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: white;
         }
         
         .stat-label {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-description {
+                font-size: 0.9rem;
+            }
+            
+            .card-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
             }
         }
         
-        .animate-card {
-            animation: fadeInUp 0.6s ease forwards;
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .card-description {
+                font-size: 0.85rem;
+            }
+            
+            .card-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.9rem;
+            }
         }
-        
-        .animate-card:nth-child(1) { animation-delay: 0.1s; }
-        .animate-card:nth-child(2) { animation-delay: 0.2s; }
-        .animate-card:nth-child(3) { animation-delay: 0.3s; }
-        .animate-card:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -153,7 +271,7 @@
 
 <div class="hero-section">
     <div class="container">
-        <h1 class="hero-title">📞 Cercanía Móvil</h1>
+        <h1 class="hero-title"><i class="fas fa-phone-alt me-3"></i>Cercanía Móvil</h1>
         <p class="hero-subtitle">Donde termina la distancia, empieza nuestra red.</p>
     </div>
 </div>
@@ -162,9 +280,9 @@
     <div class="row g-4">
         <div class="col-md-6 col-lg-3">
             <a href="/clientes" class="text-decoration-none">
-                <div class="card card-custom card-clientes animate-card">
+                <div class="card card-custom card-clientes">
                     <div class="card-body">
-                        <span class="card-icon">👥</span>
+                        <i class="fas fa-users card-icon"></i>
                         <h3 class="card-title">Clientes</h3>
                         <p class="card-description">Gestiona la información de tus clientes</p>
                         <button class="card-btn">Ir a Clientes</button>
@@ -175,9 +293,9 @@
         
         <div class="col-md-6 col-lg-3">
             <a href="/vendedores" class="text-decoration-none">
-                <div class="card card-custom card-vendedores animate-card">
+                <div class="card card-custom card-vendedores">
                     <div class="card-body">
-                        <span class="card-icon">👔</span>
+                        <i class="fas fa-user-tie card-icon"></i>
                         <h3 class="card-title">Vendedores</h3>
                         <p class="card-description">Administra tu equipo de ventas</p>
                         <button class="card-btn">Ir a Vendedores</button>
@@ -188,9 +306,9 @@
         
         <div class="col-md-6 col-lg-3">
             <a href="/planes" class="text-decoration-none">
-                <div class="card card-custom card-planes animate-card">
+                <div class="card card-custom card-planes">
                     <div class="card-body">
-                        <span class="card-icon">📱</span>
+                        <i class="fas fa-mobile-alt card-icon"></i>
                         <h3 class="card-title">Planes</h3>
                         <p class="card-description">Crea y gestiona los planes telefónicos</p>
                         <button class="card-btn">Ir a Planes</button>
@@ -201,9 +319,9 @@
         
         <div class="col-md-6 col-lg-3">
             <a href="/ventas" class="text-decoration-none">
-                <div class="card card-custom card-ventas animate-card">
+                <div class="card card-custom card-ventas">
                     <div class="card-body">
-                        <span class="card-icon">💰</span>
+                        <i class="fas fa-chart-line card-icon"></i>
                         <h3 class="card-title">Ventas</h3>
                         <p class="card-description">Registra y gestiona las ventas</p>
                         <button class="card-btn">Ir a Ventas</button>
@@ -218,24 +336,30 @@
     <div class="stats-section">
         <div class="row">
             <div class="col-md-3 stat-item">
+                <i class="fas fa-th-large stat-icon"></i>
                 <div class="stat-number">4</div>
                 <div class="stat-label">Módulos Disponibles</div>
             </div>
             <div class="col-md-3 stat-item">
+                <i class="fas fa-check-circle stat-icon"></i>
                 <div class="stat-number">100%</div>
                 <div class="stat-label">Interfaz Intuitiva</div>
             </div>
             <div class="col-md-3 stat-item">
+                <i class="fas fa-clock stat-icon"></i>
                 <div class="stat-number">24/7</div>
                 <div class="stat-label">Accesibilidad</div>
             </div>
             <div class="col-md-3 stat-item">
+                <i class="fas fa-bolt stat-icon"></i>
                 <div class="stat-number">⚡</div>
                 <div class="stat-label">Rápido y Eficiente</div>
             </div>
         </div>
     </div>
 </div>
+
+<div th:replace="navegacion :: footer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
