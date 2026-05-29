@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="navegacion :: head">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-control:disabled {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="navegacion :: navbar"></div>
+
+<div class="page-header">
+    <div class="container">
+        <h2><i class="fas fa-user-edit me-3"></i>Editar Usuario</h2>
+        <p>Modifica la información del usuario</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <form th:action="@{/guardarUsuario}" th:object="${usuario}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{fechaRegistro}">
+            
+            <!-- Sección de Datos Personales -->
+            <div class="mb-4">
+                <h3 class="section-title"><i class="fas fa-user"></i>Datos Personales</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="nombre" class="form-label">Nombre completo *</label>
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required minlength="3">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">Correo electrónico *</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="username" class="form-label">Usuario *</label>
+                        <input type="text" class="form-control" id="username" th:field="*{username}" required minlength="3">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="telefono" class="form-label">Teléfono *</label>
+                        <input type="tel" class="form-control" id="telefono" th:field="*{telefono}" required pattern="[0-9]+">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="cedula" class="form-label">Cédula *</label>
+                        <input type="text" class="form-control" id="cedula" th:field="*{cedula}" required pattern="[0-9]+">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Dejar en blanco para mantener la actual">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección de Ubicación -->
+            <div class="mb-4">
+                <h3 class="section-title"><i class="fas fa-map-marker-alt"></i>Ubicación</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="departamento" class="form-label">Departamento *</label>
+                        <select class="form-select" id="departamento" th:field="*{departamento}" required>
+                            <option value="">Seleccione</option>
+                            <option value="antioquia">Antioquia</option>
+                            <option value="bogota">Bogotá D.C.</option>
+                            <option value="valle">Valle del Cauca</option>
+                            <option value="santander">Santander</option>
+                            <option value="atlantico">Atlántico</option>
+                            <option value="bolivar">Bolívar</option>
+                            <option value="cordoba">Córdoba</option>
+                            <option value="cundinamarca">Cundinamarca</option>
+                            <option value="narino">Nariño</option>
+                            <option value="boyaca">Boyacá</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="ciudad" class="form-label">Ciudad *</label>
+                        <select class="form-select" id="ciudad" th:field="*{ciudad}" required>
+                            <option value="">Seleccione primero un departamento</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección de Dirección -->
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="direccion" th:field="*{direccion}">
+            </div>
+            
+            <!-- Estado -->
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="activo" th:field="*{activo}">
+                    <label class="form-check-label" for="activo">Usuario activo</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary-custom">
+                <i class="fas fa-save me-2"></i>Guardar Usuario
+            </button>
+            <a href="/usuarios" class="btn btn-secondary-custom">
+                <i class="fas fa-times me-2"></i>Cancelar
+            </a>
+        </form>
+    </div>
+</div>
+
+<div th:replace="navegacion :: footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Datos de ciudades por departamento
+    const ciudadesPorDepartamento = {
+        antioquia: ['Medellín', 'Envigado', 'Bello', 'Itagüí', 'Rionegro'],
+        bogota: ['Bogotá D.C.'],
+        valle: ['Cali', 'Palmira', 'Bugalagrande', 'Tuluá'],
+        santander: ['Bucaramanga', 'Floridablanca', 'Girón', 'Piedecuesta'],
+        atlantico: ['Barranquilla', 'Soledad', 'Malambo'],
+        bolivar: ['Cartagena', 'Magangué', 'Turbaco'],
+        cordoba: ['Montería', 'Lorica', 'Cereté'],
+        cundinamarca: ['Soacha', 'Chía', 'Facatativá', 'Zipaquirá'],
+        narino: ['Pasto', 'Ipiales', 'Tumaco'],
+        boyaca: ['Tunja', 'Duitama', 'Sogamoso']
+    };
+    
+    // Manejar cambio de departamento
+    document.getElementById('departamento').addEventListener('change', function() {
+        const departamento = this.value;
+        const ciudadSelect = document.getElementById('ciudad');
+        const currentCiudad = ciudadSelect.value;
+        
+        // Limpiar opciones anteriores
+        ciudadSelect.innerHTML = '<option value="">Seleccione</option>';
+        
+        if (departamento && ciudadesPorDepartamento[departamento]) {
+            ciudadesPorDepartamento[departamento].forEach(function(ciudad) {
+                const option = document.createElement('option');
+                option.value = ciudad.toLowerCase();
+                option.textContent = ciudad;
+                ciudadSelect.appendChild(option);
+            });
+            ciudadSelect.disabled = false;
+            
+            // Intentar mantener la ciudad seleccionada si existe en el nuevo departamento
+            if (currentCiudad) {
+                const exists = Array.from(ciudadSelect.options).some(opt => opt.value === currentCiudad);
+                if (exists) {
+                    ciudadSelect.value = currentCiudad;
+                }
+            }
+        } else {
+            ciudadSelect.innerHTML = '<option value="">Seleccione primero un departamento</option>';
+            ciudadSelect.disabled = true;
+        }
+    });
+    
+    // Inicializar ciudades al cargar la página
+    window.addEventListener('DOMContentLoaded', function() {
+        const departamento = document.getElementById('departamento').value;
+        if (departamento && ciudadesPorDepartamento[departamento]) {
+            const ciudadSelect = document.getElementById('ciudad');
+            const currentCiudad = ciudadSelect.value;
+            
+            ciudadSelect.innerHTML = '<option value="">Seleccione</option>';
+            ciudadesPorDepartamento[departamento].forEach(function(ciudad) {
+                const option = document.createElement('option');
+                option.value = ciudad.toLowerCase();
+                option.textContent = ciudad;
+                ciudadSelect.appendChild(option);
+            });
+            ciudadSelect.disabled = false;
+            
+            if (currentCiudad) {
+                ciudadSelect.value = currentCiudad;
+            }
+        }
+    });
+</script>
+</body>
+</html>

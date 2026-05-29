@@ -10,19 +10,25 @@ public class Vendedor {
     private Long id;
 
     private String nombre;
+    private String apellido;
     private String correo;
     private String telefono;
     private String cedula;
     private String direccion;
+    private Long usuarioId;
 
     public Vendedor() {
     }
 
-    public Vendedor(Long id, String nombre, String correo, String telefono) {
+    public Vendedor(Long id, String nombre, String apellido, String correo, String telefono, String cedula, String direccion, Long usuarioId) {
         this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.usuarioId = usuarioId;
     }
 
     public Long getId() {
@@ -39,6 +45,14 @@ public class Vendedor {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCorreo() {
@@ -71,5 +85,13 @@ public class Vendedor {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

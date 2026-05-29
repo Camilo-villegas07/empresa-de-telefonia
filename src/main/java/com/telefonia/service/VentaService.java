@@ -19,6 +19,10 @@ public class VentaService {
         return ventaRepository.findAll();
     }
 
+    public List<Venta> listarPorVendedorId(Long vendedorId) {
+        return ventaRepository.findByVendedorId(vendedorId);
+    }
+
     public Venta buscar(Long id) {
         Optional<Venta> optional = ventaRepository.findById(id);
         return optional.orElse(null);

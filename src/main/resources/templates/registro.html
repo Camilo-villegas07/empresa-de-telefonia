@@ -6,179 +6,26 @@
     <title>Registro - Cercanía Móvil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
     <style>
         body {
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
-        }
-        
-        .registro-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 50px 40px;
-            max-width: 900px;
-            width: 100%;
-            margin: 20px auto;
-            animation: fadeInUp 0.6s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .registro-icon {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .registro-icon i {
-            font-size: 4rem;
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .registro-title {
-            text-align: center;
-            color: #333;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        .registro-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 0.95rem;
-        }
-        
-        .section-title {
-            color: #ff6b6b;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ff6b6b;
-            display: flex;
-            align-items: center;
-        }
-        
-        .section-title i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .form-control {
-            border-radius: 10px;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            border-color: #ff6b6b;
-            box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
         }
         
         .form-control:disabled {
             background-color: #f8f9fa;
             cursor: not-allowed;
         }
-        
-        .form-select {
-            border-radius: 10px;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-        
-        .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        
-        .btn-crear-cuenta {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            padding: 15px 40px;
-            border-radius: 25px;
-            color: white;
-            font-weight: bold;
-            width: 100%;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            font-size: 1.1rem;
-        }
-        
-        .btn-crear-cuenta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
-        }
-        
-        .login-link {
-            text-align: center;
-            margin-top: 25px;
-            color: #666;
-        }
-        
-        .login-link a {
-            color: #ff6b6b;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .login-link a:hover {
-            text-decoration: underline;
-            color: #feca57;
-        }
-        
-        .direccion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-        
-        .direccion-grid .col-md-6 {
-            padding: 0;
-        }
-        
-        .error-message {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 500;
-            animation: shake 0.5s ease;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
     </style>
 </head>
 <body>
     <div class="registro-container">
-        <div class="registro-icon">
-            <i class="fas fa-user-plus"></i>
-        </div>
-        
+        <img src="/images/logo.jpeg" alt="Cercanía Móvil" class="registro-logo">
         <h1 class="registro-title">Registro</h1>
         <p class="registro-subtitle">Crea tu cuenta en Cercanía Móvil</p>
         
@@ -196,37 +43,44 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="nombre" class="form-label">Nombre completo *</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre completo">
+                        <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese su nombre completo" minlength="3">
+                        <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres</div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="email" class="form-label">Correo electrónico *</label>
                         <input type="email" class="form-control" id="email" name="email" required placeholder="Ingrese su correo electrónico">
+                        <div class="invalid-feedback">Ingrese un correo electrónico válido</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="username" class="form-label">Usuario *</label>
-                        <input type="text" class="form-control" id="username" name="username" required placeholder="Ingrese su nombre de usuario">
+                        <input type="text" class="form-control" id="username" name="username" required placeholder="Ingrese su nombre de usuario" minlength="3">
+                        <div class="invalid-feedback">El usuario debe tener al menos 3 caracteres</div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="telefono" class="form-label">Teléfono *</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Ingrese su teléfono">
+                        <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Ingrese su teléfono" pattern="[0-9]+">
+                        <div class="invalid-feedback">El teléfono debe contener solo números</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="cedula" class="form-label">Cédula *</label>
-                        <input type="text" class="form-control" id="cedula" name="cedula" required placeholder="Ingrese su cédula">
+                        <input type="text" class="form-control" id="cedula" name="cedula" required placeholder="Ingrese su cédula" pattern="[0-9]+">
+                        <div class="invalid-feedback">La cédula debe contener solo números</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="password" class="form-label">Contraseña *</label>
-                        <input type="password" class="form-control" id="password" name="password" required placeholder="Ingrese su contraseña">
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Ingrese su contraseña" minlength="6">
+                        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres</div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirmPassword" class="form-label">Confirmar contraseña *</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required placeholder="Confirme su contraseña">
+                        <div class="invalid-feedback">Las contraseñas no coinciden</div>
                     </div>
                 </div>
             </div>
@@ -312,6 +166,62 @@
                 ciudadSelect.innerHTML = '<option value="">Seleccione primero un departamento</option>';
                 ciudadSelect.disabled = true;
             }
+        });
+        
+        // Validación del formulario
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const form = this;
+            const inputs = form.querySelectorAll('input[required]');
+            const selects = form.querySelectorAll('select[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else if (input.pattern && !new RegExp(input.pattern).test(input.value)) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else if (input.minLength && input.value.length < input.minLength) {
+                    input.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+            
+            selects.forEach(select => {
+                if (!select.value) {
+                    select.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    select.classList.remove('is-invalid');
+                }
+            });
+            
+            // Validar contraseñas coinciden
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                showToast('Por favor, corrija los errores en el formulario', 'error');
+                return;
+            }
+        });
+        
+        // Remover estado de error al escribir
+        document.querySelectorAll('.form-control, .form-select').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
+            input.addEventListener('change', function() {
+                this.classList.remove('is-invalid');
+            });
         });
     </script>
 </body>

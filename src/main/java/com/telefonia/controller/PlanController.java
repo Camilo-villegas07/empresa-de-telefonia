@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PlanController {
@@ -38,8 +39,13 @@ public class PlanController {
     }
 
     @GetMapping("/eliminarPlan/{id}")
-    public String eliminarPlan(@PathVariable Long id) {
-        planService.eliminar(id);
+    public String eliminarPlan(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            planService.eliminar(id);
+            redirectAttributes.addFlashAttribute("success", "Plan eliminado correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "No se puede eliminar el plan porque tiene ventas asociadas");
+        }
         return "redirect:/planes";
     }
 }

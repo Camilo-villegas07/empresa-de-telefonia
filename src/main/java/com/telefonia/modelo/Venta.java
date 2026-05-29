@@ -11,12 +11,15 @@ public class Venta {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @ManyToOne
+    @JoinColumn(name = "vendedor_id")
     private Vendedor vendedor;
 
     @ManyToOne
+    @JoinColumn(name = "plan_id")
     private Plan plan;
 
     private LocalDate fechaVenta;

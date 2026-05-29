@@ -1,7 +1,9 @@
 package com.telefonia.controller;
 
 import com.telefonia.modelo.Usuario;
+import com.telefonia.modelo.Vendedor;
 import com.telefonia.repository.UsuarioRepository;
+import com.telefonia.repository.VendedorRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class LoginController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private VendedorRepository vendedorRepository;
+
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -26,8 +31,8 @@ public class LoginController {
                        @RequestParam String password,
                        HttpSession session,
                        RedirectAttributes redirectAttributes) {
-        // Validación para el usuario admin
-        if ("admin".equals(username) && "admin".equals(password)) {
+        // Validación para el usuario admin (NOTA: En producción usar encriptación de contraseñas)
+        if ("admin".equals(username) && "admin123".equals(password)) {
             session.setAttribute("usuario", "admin");
             session.setAttribute("isAdmin", true);
             return "redirect:/home";
@@ -41,7 +46,7 @@ public class LoginController {
             return "redirect:/login";
         }
         
-        // Verificar contraseña
+        // Verificar contraseña (NOTA: En producción usar BCrypt o similar)
         if (!usuario.getPassword().equals(password)) {
             redirectAttributes.addAttribute("error", "password_incorrecto");
             return "redirect:/login";
@@ -106,7 +111,18 @@ public class LoginController {
         // Guardar en base de datos
         usuarioRepository.save(usuario);
         
-        System.out.println("Usuario registrado exitosamente: " + username);
+        // Crear automáticamente el vendedor asociado
+        Vendedor vendedor = new Vendedor();
+        vendedor.setNombre(nombre);
+        vendedor.setApellido(""); // Se puede agregar campo apellido en registro si se desea
+        vendedor.setCorreo(email);
+        vendedor.setTelefono(telefono);
+        vendedor.setCedula(cedula);
+        vendedor.setDireccion(direccion);
+        vendedor.setUsuarioId(usuario.getId());
+        vendedorRepository.save(vendedor);
+        
+        System.out.println("Usuario y vendedor registrados exitosamente: " + username);
         
         // Redirigir al login después del registro exitoso
         return "redirect:/login?registro=exitoso";

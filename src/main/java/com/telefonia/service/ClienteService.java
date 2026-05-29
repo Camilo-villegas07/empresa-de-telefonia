@@ -17,6 +17,10 @@ public class ClienteService {
         return repository.findAll();
     }
 
+    public List<Cliente> listarPorVendedorId(Long vendedorId) {
+        return repository.findByVendedorId(vendedorId);
+    }
+
     public void guardar(Cliente cliente) {
         repository.save(cliente);
     }

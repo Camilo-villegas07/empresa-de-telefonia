@@ -17,6 +17,14 @@ public class VendedorService {
         return repository.findAll();
     }
 
+    public List<Vendedor> listarPorUsuarioId(Long usuarioId) {
+        return repository.findByUsuarioId(usuarioId);
+    }
+
+    public Vendedor buscarPorUsuarioId(Long usuarioId) {
+        return repository.findVendedorByUsuarioId(usuarioId);
+    }
+
     public void guardar(Vendedor vendedor) {
         repository.save(vendedor);
     }
@@ -26,6 +34,9 @@ public class VendedorService {
     }
 
     public void eliminar(Long id) {
+        // Verificar si el vendedor tiene ventas asociadas
+        // Si tiene ventas, no permitir eliminar
+        // Esto se maneja en el controlador con try-catch
         repository.deleteById(id);
     }
 }
