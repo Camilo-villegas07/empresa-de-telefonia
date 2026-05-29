@@ -73,6 +73,7 @@ public class LoginController {
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre,
+                          @RequestParam String apellido,
                           @RequestParam String email,
                           @RequestParam String username,
                           @RequestParam String telefono,
@@ -104,7 +105,7 @@ public class LoginController {
         
         // Crear nuevo usuario
         Usuario usuario = new Usuario(
-            nombre, email, username, telefono, password,
+            nombre, apellido, email, username, telefono, password,
             cedula, departamento, ciudad, direccion
         );
         
@@ -114,7 +115,7 @@ public class LoginController {
         // Crear automáticamente el vendedor asociado
         Vendedor vendedor = new Vendedor();
         vendedor.setNombre(nombre);
-        vendedor.setApellido(""); // Se puede agregar campo apellido en registro si se desea
+        vendedor.setApellido(apellido);
         vendedor.setCorreo(email);
         vendedor.setTelefono(telefono);
         vendedor.setCedula(cedula);

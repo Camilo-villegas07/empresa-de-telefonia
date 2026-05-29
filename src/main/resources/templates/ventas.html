@@ -54,8 +54,8 @@
                     <tbody>
                         <tr th:each="venta : ${ventas}">
                             <td th:text="${venta.id}"></td>
-                            <td th:text="${venta.cliente.nombre}"></td>
-                            <td th:text="${venta.vendedor.nombre}"></td>
+                            <td th:text="${venta.cliente.nombre + ' ' + (venta.cliente.apellido != null ? venta.cliente.apellido : '')}"></td>
+                            <td th:text="${venta.vendedor.nombre + ' ' + (venta.vendedor.apellido != null ? venta.vendedor.apellido : '')}"></td>
                             <td th:text="${venta.plan.nombre}"></td>
                             <td th:text="${venta.fechaVenta}"></td>
                             <td>

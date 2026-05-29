@@ -11,6 +11,7 @@ public class Usuario {
     private Long id;
 
     private String nombre;
+    private String apellido;
     private String email;
     private String username;
     private String telefono;
@@ -32,10 +33,11 @@ public class Usuario {
         this.activo = true;
     }
 
-    public Usuario(String nombre, String email, String username, String telefono, String password,
+    public Usuario(String nombre, String apellido, String email, String username, String telefono, String password,
                    String cedula, String departamento, String ciudad, String direccion) {
         this();
         this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
         this.username = username;
         this.telefono = telefono;
@@ -61,6 +63,14 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getEmail() {
